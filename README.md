@@ -23,7 +23,7 @@ public key and test or live-mode secret key in a call to setCredentials:
 
 Once your credentials are set, running a basic credit card charge looks like:
 
-    $card = new ChargeIO_Card(array('number' => '4242424242424242', 'exp_month' => 10, 'exp_year' => '2016'));
+    $card = new ChargeIO_Card(array('number' => '4242424242424242', 'exp_month' => 10, 'exp_year' => '2019'));
     $charge = ChargeIO_Charge::create($card, 1200);
 
 Using the ChargeIO.js library for payment tokenization support on your payment page
@@ -36,4 +36,4 @@ POST the token ID you receive to your PHP script and then perform the charge:
 
 ## Documentation
 
-The latest ChargeIO API documentation is available at https://chargeio.com/developers.
+The latest ChargeIO API documentation is available at https://developers.affinipay.com/reference/api.html#PaymentGatewayAPI.

@@ -5,7 +5,7 @@ abstract class ChargeIO {
 	public static $apiUrl = 'https://api.chargeio.com/v1';
 	public static $verifySslCerts = true;
 	public static $debug = false;
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 
 	public static function getCredentials() {
 		return self::$credentials;
@@ -18,11 +18,11 @@ abstract class ChargeIO {
 	public static function getApiUrl() {
 		return self::$apiUrl;
 	}
-	
+
 	public static function setApiUrl($apiUrl) {
 		self::$apiUrl = $apiUrl;
 	}
-	
+
 	public static function getVerifySslCerts() {
 		return self::$verifySslCerts;
 	}
@@ -30,7 +30,7 @@ abstract class ChargeIO {
 	public static function setVerifySslCerts($verify) {
 		self::$verifySslCerts = $verify;
 	}
-	
+
 	public static function setDebug($debug) {
 		self::$debug = $debug;
 	}

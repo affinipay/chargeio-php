@@ -1,0 +1,9 @@
+{
+    "name": "affinipay/chargeio-php",
+    "description": "AffiniPay PHP Library",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+      "php": ">=5.4.0"
+    }
+}
