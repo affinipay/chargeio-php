@@ -1,11 +1,11 @@
 chargeio-php
 ============
 
-ChargeIO PHP Client Library
+PHP Client Library for the AffiniPay Payment Gateway
 
 ## Installation
 
-Download the PHP client library by doing the following:
+Download the PHP client library:
 
     git clone git://github.com/charge-io/chargeio-php.git
 
@@ -13,27 +13,32 @@ To use the library in your application, add the following to your PHP script:
 
     require_once '/path/to/chargeio-php/lib/ChargeIO.php';
 
-The library's APIs require credentials to access your merchant data on the
-ChargeIO servers. You can provide credentials as arguments to the APIs used to
-retrieve objects, or you can configure the library with default credentials to
-use when necessary. To set the default credentials, substitute your ChargeIO
-public key and test or live-mode secret key in a call to setCredentials:
+### Set up ChargeIO credentials
+The library's APIs require credentials to access your merchant data on the AffiniPay servers. You
+can either:
 
-    ChargeIO::setCredentials(new ChargeIO_Credentials('<public_key>', '<secret_key>'));
+- Provide credentials as arguments to each API call.
+- Configure the library with default credentials.
 
-Once your credentials are set, running a basic credit card charge looks like:
+  To set default credentials, call ChargeIO::setCredentials with an AffiniPay_Credentials object. The AffiniPay_Credentials object is instantiated with a public_key and a secret_key.
 
-    $card = new ChargeIO_Card(array('number' => '4242424242424242', 'exp_month' => 10, 'exp_year' => '2019'));
-    $charge = ChargeIO_Charge::create($card, 1200);
+    ChargeIO::setCredentials(new AffiniPay_Credentials('<public_key>', '<secret_key>'));
 
-Using the ChargeIO.js library for payment tokenization support on your payment page
-simplifies the process even more. Just configure the token callback on your page to
-POST the token ID you receive to your PHP script and then perform the charge:
+### Using AffiniPay hosted fields to create a charge token
+You must tokenize all sensitive payment information before you submit it to AffiniPay. On your
+payment form, use AffiniPay’s hosted fields to secure payment data and call
+window.AffiniPay.HostedFields.getPaymentToken to create a one-time payment token. See
+["Creating payment forms using hosted fields"](https://developers.affinipay.com/collect/create-payment-form-hosted-fields.html). Then, POST the payment token ID to your PHP script.
 
+### Making a charge
+Pass an amount and the one-time token ID returned from your payment page to complete a charge.
+
+```
     $amount = $_POST['amount'];
     $token_id = $_POST['token_id'];
     $charge = ChargeIO_Charge::create(new ChargeIO_PaymentMethodReference(array('id' => $token_id)), $amount);
+```
 
 ## Documentation
 
-The latest ChargeIO API documentation is available at https://developers.affinipay.com/reference/api.html#PaymentGatewayAPI.
+The latest AffiniPay Payment Gateway API documentation is available at https://developers.affinipay.com/reference/api.html#PaymentGatewayAPI.
